@@ -23,11 +23,11 @@ public class MiniMarket {
         this.attempts = attempts;
     }
 
-    public List<Person> getPersons() {
+    public List<Person> getPeople() {
         return this.people;
     }
 
-    public void setPersons(List<Person> persons) {
+    public void setPeople(List<Person> persons) {
         this.people = persons;
     }
 
