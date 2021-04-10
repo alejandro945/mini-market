@@ -53,8 +53,13 @@ public class MiniMarket {
     }
 
     public int getPenultimate(int identification) {
+        int penultimate = 0;
         String render = String.valueOf(identification);
-        int penultimate = Integer.parseInt(render.substring((render.length() - 2), (render.length() - 1)));
+        if (render.length() > 1) {
+            penultimate = Integer.parseInt(render.substring((render.length() - 2), (render.length() - 1)));
+        } else {
+            penultimate = identification;
+        }
         return penultimate;
     }
 

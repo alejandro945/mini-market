@@ -29,8 +29,10 @@ class MarketTest {
         setupScenary1();
         try {
             market.addPersonToMarket(p.getDt(), p.getId());
+            fail("The Child should not be added");
         } catch (UnderAgeException u) {
-            assertEquals("Adult Type", p.getDt(), "The Child should not be added");
+            assertTrue(market.getPeople().isEmpty());
+            assertEquals(0, market.getPeople().size()); // ANOTHER IMPLEMENTATION WAY
         } catch (DateException d) {
             fail("DateException isn't expected here");
         }
@@ -39,28 +41,44 @@ class MarketTest {
     @Test
     public void testAddPerson2() {
         setupScenary2();
-        String dateRender = (market.oddState(market.getDay())) ? "DIGITO IMPAR" : "DIGITO PAR";
-        String idRender = (market.oddState(market.getPenultimate(p.getId()))) ? "PAR" : "IMPAR";
+        String dateRender = (market.oddState(market.getDay())) ? "OOD DIGIT" : "PAIR DIGIT";
+        String idRender = (market.oddState(market.getPenultimate(p.getId()))) ? "PAIR" : "ODD";
         try {
             market.addPersonToMarket(p.getDt(), p.getId());
+            assertTrue(p.getId() == market.getPeople().get(0).getId());
+            assertTrue(p.getDt() == market.getPeople().get(0).getDt());
+            if (dateRender.equals(idRender)) {
+                fail("The Person should not be added(DateException Expected)");
+            }
         } catch (UnderAgeException u) {
             fail("UnderAgeException isn't expected here");
         } catch (DateException d) {
-            assertEquals(dateRender, idRender, "The Person should not be added");
+            assertTrue(market.getPeople().isEmpty());
+            assertEquals(0, market.getPeople().size(), "Great the person could not enter"); // ANOTHER IMPLEMENTATION
+                                                                                            // WAY
+            // ADITIONAL MESSAGE assertEquals(dateRender, idRender);
         }
     }
 
     @Test
     public void testAddPerson3() {
         setupScenary3();
-        String dateRender = (market.oddState(market.getDay())) ? "DIGITO IMPAR" : "DIGITO PAR";
-        String idRender = (market.oddState(market.getPenultimate(p.getId()))) ? "PAR" : "IMPAR";
+        String dateRender = (market.oddState(market.getDay())) ? "OOD DIGIT" : "PAIR DIGIT";
+        String idRender = (market.oddState(market.getPenultimate(p.getId()))) ? "PAIR" : "ODD";
         try {
             market.addPersonToMarket(p.getDt(), p.getId());
+            assertTrue(p.getId() == market.getPeople().get(0).getId());
+            assertTrue(p.getDt() == market.getPeople().get(0).getDt());
+            if (dateRender.equals(idRender)) {
+                fail("The Person should not be added(DateException Expected)");
+            }
         } catch (UnderAgeException u) {
             fail("UnderAgeException isn't expected here");
         } catch (DateException d) {
-            assertEquals(dateRender, idRender, "The Person should not be added");
+            assertTrue(market.getPeople().isEmpty(), "Great the person could not enter");
+            assertEquals(0, market.getPeople().size()); // ANOTHER IMPLEMENTATION
+                                                        // WAY
+            // ADITIONAL MESSAGE assertEquals(dateRender, idRender);
         }
     }
 }
